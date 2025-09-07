@@ -12,6 +12,7 @@ import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Textarea } from "@/components/ui/textarea"
+import DashboardLayout from "@/components/layout/DashboardLayout"
 import {
   Dialog,
   DialogContent,
@@ -304,6 +305,8 @@ Generated: ${new Date().toISOString()}`,
   }
 
   return (
+        <DashboardLayout title="Report Dashboard" description="Overview of your network operations">
+    
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       <div className="p-4 sm:p-6 space-y-6 lg:space-y-8">
         {/* Header */}
@@ -1236,5 +1239,6 @@ Generated: ${new Date().toISOString()}`,
         </Dialog>
       </div>
     </div>
+  </DashboardLayout>
   )
 }
