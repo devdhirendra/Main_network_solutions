@@ -263,15 +263,15 @@ export default function TechnicianManagement() {
     }
   }
 
-  const filteredTechnicians = technicians.filter((tech) => {
-    const matchesSearch =
-      tech.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      tech.phone.includes(searchTerm) ||
-      tech.area.toLowerCase().includes(searchTerm.toLowerCase())
-    const matchesStatus = statusFilter === "all" || tech.status === statusFilter
-    const matchesAttendance = attendanceFilter === "all" || tech.attendance === attendanceFilter
-    return matchesSearch && matchesStatus && matchesAttendance
-  })
+  // const filteredTechnicians = technicians.filter((tech) => {
+  //   const matchesSearch =
+  //     tech.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //     tech.phone.includes(searchTerm) ||
+  //     tech.area.toLowerCase().includes(searchTerm.toLowerCase())
+  //   const matchesStatus = statusFilter === "all" || tech.status === statusFilter
+  //   const matchesAttendance = attendanceFilter === "all" || tech.attendance === attendanceFilter
+  //   return matchesSearch && matchesStatus && matchesAttendance
+  // })
 
   const fetchTechniciansData = async () => {
     try {
