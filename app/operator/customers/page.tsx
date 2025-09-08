@@ -98,7 +98,7 @@ export default function CustomersPage() {
       console.log("[v0] Fetching customers from API...")
 
       const [customersData, plansData] = await Promise.allSettled([
-        operatorApi.getAllCustomers(),
+        operatorApi.getAlloperator(),
         operatorApi.getAllPlans(),
       ])
 

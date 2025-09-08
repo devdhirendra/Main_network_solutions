@@ -1671,6 +1671,7 @@ export const operatorApi = {
   deleteTechnician: (id: string) => apiClient.deleteOperatorTechnician(id),
 
   // Customers
+  getAlloperator: () => apiClient.getOperatorCustomers(),
   getCustomers: () => apiClient.getOperatorCustomers(),
   registerCustomer: (data: any) => apiClient.registerOperatorCustomer(data),
   getCustomerProfile: (id: string) => apiClient.getOperatorCustomerProfile(id),
