@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, use } from "react"
 import { useAuth } from "@/contexts/AuthContext"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -44,10 +44,25 @@ const leaveBalance = {
   emergency: { total: 5, used: 0, remaining: 5 },
 }
 
+interface LeaveRequest {
+  id: string
+  type: string
+  startDate: string
+  endDate: string
+  days: number
+  reason: string
+  status: string
+  appliedDate: string
+  approvedBy: string | null
+  approvedDate: string | null
+  comments: string
+  emergencyContact: string
+}
+
 export default function LeavePage() {
   const { user } = useAuth()
   const { toast } = useToast()
-  const [leaveRequests, setLeaveRequests] = useState([])
+  const [leaveRequests, setLeaveRequests] = useState<LeaveRequest[]>([])
   const [searchTerm, setSearchTerm] = useState("")
   const [statusFilter, setStatusFilter] = useState("all")
   const [showNewLeaveDialog, setShowNewLeaveDialog] = useState(false)

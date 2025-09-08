@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { use, useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -31,6 +31,71 @@ import {
   Download,
   Filter,
 } from "lucide-react"
+import { inter } from "@/app/layout"
+
+
+interface Customer {
+  name: string
+  phone: string
+  address: string
+  email: string
+
+}
+
+interface Task {
+  id: string
+  ticketNumber: string
+  type: string
+  title: string
+  description: string
+  customer: Customer
+  priority: string
+  status: string
+  assignedDate: string
+  dueDate: string
+  estimatedDuration: string
+  location: { lat: number; lng: number }
+  materials: string[]
+  notes: string
+  createdBy: string
+  startedAt?: string
+  completedAt?: string
+  workNotes?: string
+  completionNotes?: string
+}
+
+interface TaskUpdate {
+  id: string
+  status?: string
+  workNotes?: string
+  completionNotes?: string
+}
+
+interface TaskFilter {
+  type: string
+  priority: string
+  status: string
+  search: string
+}
+
+interface TaskStats {
+  total: number
+  assigned: number
+  inProgress: number
+  completed: number
+}
+
+interface TaskActionHandlers {
+  onStartTask: (taskId: string) => void
+  onPauseTask: (taskId: string) => void
+  onCompleteTask: (taskId: string) => void
+  onNavigate: (location: any) => void
+  onCallCustomer: (phone: string) => void
+  onViewDetails: (task: Task) => void
+  getPriorityColor: (priority: string) => string
+  getStatusColor: (status: string) => string
+  getTaskTypeIcon: (type: string) => JSX.Element
+}
 
 // Mock data for tasks
 const mockTasks = [
@@ -134,7 +199,7 @@ export default function TasksPage() {
   const [typeFilter, setTypeFilter] = useState("all")
   const [priorityFilter, setPriorityFilter] = useState("all")
   const [statusFilter, setStatusFilter] = useState("all")
-  const [selectedTask, setSelectedTask] = useState<any>(null)
+  const [selectedTask, setSelectedTask] = useState<Task | null>(null)
   const [showTaskDialog, setShowTaskDialog] = useState(false)
   const [workNotes, setWorkNotes] = useState("")
   const [completionNotes, setCompletionNotes] = useState("")
