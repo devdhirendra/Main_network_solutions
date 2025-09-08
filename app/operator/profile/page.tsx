@@ -87,17 +87,15 @@ export default function OperatorProfilePage() {
                 <Avatar className="h-24 w-24 mx-auto">
                   <AvatarImage src={user.avatar || "/placeholder.svg"} alt={user.name} />
                   <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-600 text-white text-2xl">
-                    {user?.name
-                      ? user.name
-                          .split(" ")
-                          .map((n) => n[0])
-                          .join("")
-                          .toUpperCase()
-                      : "U"}
-
+                    {user.name
+                      .split(" ")
+                      .map((n) => n[0])
+                      .join("")
                       .toUpperCase()}
->>>>>>> 410eb7492e8cdd8c96c700700cfc1792d8b4a58a
-                <Button
+                  </AvatarFallback>
+                </Avatar>
+                {isEditing && (
+                  <Button
                     size="icon"
                     variant="outline"
                     className="absolute -bottom-2 -right-2 h-8 w-8 rounded-full bg-transparent"
