@@ -149,10 +149,10 @@ export default function CustomersPage() {
 
   const filteredCustomers = customers.filter((customer) => {
     const matchesSearch =
-      customer.profileDetail.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      customer.profileDetail.name.toUpperCase().includes(searchTerm.toUpperCase()) ||
       customer.profileDetail.phone.includes(searchTerm) ||
-      customer.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      customer.user_id.toLowerCase().includes(searchTerm.toLowerCase())
+      customer.email.toUpperCase().includes(searchTerm.toUpperCase()) ||
+      customer.user_id.toUpperCase().includes(searchTerm.toUpperCase())
     const matchesStatus = statusFilter === "all" || customer.Permissions.status === statusFilter
     const matchesPlan = planFilter === "all" || customer.profileDetail.planId.includes(planFilter)
     return matchesSearch && matchesStatus && matchesPlan
