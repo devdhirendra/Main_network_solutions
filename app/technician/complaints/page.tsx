@@ -41,17 +41,51 @@ import {
 } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 
+interface technicaiancomplaint {
+  id: string
+  ticketNumber: string
+  customer: {
+    name: string
+    phone: string
+    address: string
+    email: string
+    customerId: string
+  }
+  issue: {
+    type: string
+    category: string
+    description: string
+    severity: string
+    reportedTime: string
+  }
+  status: string
+  priority: string
+  assignedDate: string
+  dueDate: string
+  estimatedResolution: string
+  location: { lat: number; lng: number }
+  previousComplaints: number
+  customerNotes: string
+  technicianNotes: string
+  resolution?: string
+  startTime?: string
+  resolvedTime?: string
+}
+
 export default function ComplaintsPage() {
   const { user } = useAuth()
   const { toast } = useToast()
-  const [complaints, setComplaints] = useState([])
+  const [complaints, setComplaints] = useState<technicaiancomplaint[]>([])
   const [searchTerm, setSearchTerm] = useState("")
   const [statusFilter, setStatusFilter] = useState("all")
   const [priorityFilter, setPriorityFilter] = useState("all")
-  const [selectedComplaint, setSelectedComplaint] = useState<any>(null)
+  const [selectedComplaint, setSelectedComplaint] = useState("none")
   const [technicianNotes, setTechnicianNotes] = useState("")
   const [resolution, setResolution] = useState("")
   const [loading, setLoading] = useState(true)
+
+
+ 
 
   useEffect(() => {
     if (user?.user_id) {
@@ -68,6 +102,7 @@ export default function ComplaintsPage() {
 
       const technicianId = user.profileDetail?.technicianId || user.user_id
       const assignedComplaints = await technicianApi.getAssignedComplaints(technicianId)
+      // const getallcomplaints = await technicianApi.getAllComplaints() 
 
       console.log("[v0] Fetched complaints:", assignedComplaints)
 
@@ -108,6 +143,8 @@ export default function ComplaintsPage() {
         : []
 
       setComplaints(transformedComplaints)
+
+      // setComplaints(transformedComplaints)
       console.log("[v0] Complaints loaded successfully")
     } catch (error) {
       console.error("[v0] Error fetching complaints:", error)
