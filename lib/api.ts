@@ -480,6 +480,7 @@ class ApiClient {
     const response = await this.request<User[]>("/admin/customer/all")
     return response.data || (response as User[])
   }
+  
 
   async addCustomer(data: {
     email: string
@@ -1656,6 +1657,7 @@ class ApiClient {
 const apiClient = new ApiClient(API_BASE_URL)
 
 export const operatorApi = {
+  getAll: () => apiClient.getAllOperators(),
   // Profile
   getProfile: (id: string) => apiClient.getOperatorProfile(id),
   updateProfile: (id: string, data: any) => apiClient.updateOperatorProfile(id, data),
@@ -1729,7 +1731,9 @@ export const technicianApi = {
 }
 
 export const inventoryApi = {
+  getalltechnician: () => apiClient.getAllTechnicians(),
   // Stock Management
+  getAllStockProducts: () => apiClient.getAllStockProducts(),
   getAllProducts: () => apiClient.getAllStockProducts(),
   addProduct: (data: any) => apiClient.addStockItem(data),
   updateProduct: (id: string, data: any) => apiClient.updateStockItem(id, data),
@@ -1755,7 +1759,7 @@ export const inventoryApi = {
   confirmInstallation: (itemId: string) => apiClient.confirmInstallation(itemId),
 
   // Stock Movements
-  getMovements: () => apiClient.getStockMovements(),
+  getStockMovements: () => apiClient.getStockMovements(),
 }
 
 export const authApi = {

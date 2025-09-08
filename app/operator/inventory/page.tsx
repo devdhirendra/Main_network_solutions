@@ -38,7 +38,7 @@ import {
   Wrench,
   RefreshCw,
 } from "lucide-react"
-import { apiClient } from "@/lib/api"
+import { apiClient, inventoryApi } from "@/lib/api"
 import { useToast } from "@/hooks/use-toast"
 
 interface InventoryItem {
@@ -190,9 +190,9 @@ export default function InventoryManagement() {
       console.log("[v0] Fetching inventory data from API...")
 
       const [inventoryData, issuanceData, technicianData] = await Promise.all([
-        apiClient.getAllStockProducts(),
-        apiClient.getAllIssuances(),
-        apiClient.getAllTechnicians(),
+        inventoryApi.getAllProducts(),
+        inventoryApi.getAllIssuances(),
+        inventoryApi.getalltechnician(),
       ])
 
       console.log("[v0] Inventory items fetched:", inventoryData.length)

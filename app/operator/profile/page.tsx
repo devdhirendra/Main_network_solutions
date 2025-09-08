@@ -94,10 +94,10 @@ export default function OperatorProfilePage() {
                           .join("")
                           .toUpperCase()
                       : "U"}
-                  </AvatarFallback>
-                </Avatar>
-                {isEditing && (
-                  <Button
+
+                      .toUpperCase()}
+>>>>>>> 410eb7492e8cdd8c96c700700cfc1792d8b4a58a
+                <Button
                     size="icon"
                     variant="outline"
                     className="absolute -bottom-2 -right-2 h-8 w-8 rounded-full bg-transparent"
