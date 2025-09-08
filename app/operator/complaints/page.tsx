@@ -30,7 +30,7 @@ import {
   TrendingDown,
   RefreshCw,
 } from "lucide-react"
-import { apiClient } from "@/lib/api"
+import { apiClient, operatorApi } from "@/lib/api"
 import { useToast } from "@/hooks/use-toast"
 
 interface Complaint {
@@ -220,7 +220,7 @@ export default function ComplaintsManagement() {
         technicianId: newComplaint.technicianId,
       }
 
-      await apiClient.createComplaint(complaintData)
+      await operatorApi.createComplaint(complaintData.customerUserId, complaintData)
 
       toast({
         title: "Complaint Created",
