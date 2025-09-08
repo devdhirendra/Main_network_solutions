@@ -12,18 +12,19 @@ import { Separator } from "@/components/ui/separator"
 import { Camera, Save, User, Mail, Phone, Building, Calendar, Shield, MapPin } from "lucide-react"
 import { useState } from "react"
 import { useToast } from "@/hooks/use-toast"
+import { profile } from "console"
 
 export default function OperatorProfilePage() {
   const { user } = useAuth()
   const [isEditing, setIsEditing] = useState(false)
   const [formData, setFormData] = useState({
-    name: user?.name || "",
-    email: user?.email || "",
-    phone: user?.phone || "",
-    companyName: user?.companyName || "",
-    address: user?.address || "",
-    emergencyContact: user?.emergencyContact || "",
-    bio: user?.bio || "",
+    name: user?.profileDetail.name || "",
+    email: user?.profileDetail.email || "",
+    phone: user?.profileDetail.phone || "",
+    companyName: user?.profileDetail.companyName || "",
+    address: user?.profileDetail.address || "",
+    emergencyContact: user?.profileDetail.phone || "",
+    bio: user?.role || "operator bio goes here...",
   })
   const { toast } = useToast()
 
@@ -87,7 +88,7 @@ export default function OperatorProfilePage() {
                 <Avatar className="h-24 w-24 mx-auto">
                   <AvatarImage src={user.avatar || "/placeholder.svg"} alt={user.name} />
                   <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-600 text-white text-2xl">
-                    {user.name
+                    {user.profileDetail.name
                       .split(" ")
                       .map((n) => n[0])
                       .join("")
@@ -104,22 +105,22 @@ export default function OperatorProfilePage() {
                   </Button>
                 )}
               </div>
-              <CardTitle className="mt-4">{user.name}</CardTitle>
+              <CardTitle className="mt-4">{user.profileDetail.name}</CardTitle>
               <CardDescription>{user.email}</CardDescription>
               <div className="flex justify-center gap-2 mt-2">
                 <Badge className={getRoleColor(user.role)}>{user.role.toUpperCase()}</Badge>
-                <Badge className={getStatusColor(user.status)}>{user.status.toUpperCase()}</Badge>
+                <Badge className={getStatusColor(user.profileDetail.status)}>{user.profileDetail.status.toUpperCase()}</Badge>
               </div>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 <div className="flex items-center gap-3 text-sm">
                   <User className="h-4 w-4 text-gray-500" />
-                  <span>ID: {user.id}</span>
+                  <span>ID: {user.user_id}</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm">
                   <Building className="h-4 w-4 text-gray-500" />
-                  <span>Operator: {user.operatorId}</span>
+                  <span>Operator: {user.profileDetail.operatorId}</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm">
                   <Calendar className="h-4 w-4 text-gray-500" />

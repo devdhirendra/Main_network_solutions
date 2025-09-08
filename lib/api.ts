@@ -1,3 +1,5 @@
+import { create } from "domain"
+
 const API_BASE_URL = "https://nsbackend-silk.vercel.app/api"
 
 export interface ApiResponse<T = any> {
@@ -1419,6 +1421,23 @@ class ApiClient {
       body: JSON.stringify(data),
     })
   }
+    async createCustomer(data: {
+    email: string
+    password: string
+    profileDetail: {
+      name: string
+      phone: string
+      address: string
+      planId: string
+      connectionType: string
+      monthlyRate: number
+    }
+  }): Promise<ApiResponse> {
+    return this.request("/operator/customer/register", {
+      method: "POST",
+      body: JSON.stringify(data),
+    })
+  }
 
   async getOperatorTechnicianProfile(userId: string): Promise<User> {
     const response = await this.request<User>(`/operator/technician/profile/${userId}`)
@@ -1671,6 +1690,7 @@ export const operatorApi = {
   deleteTechnician: (id: string) => apiClient.deleteOperatorTechnician(id),
 
   // Customers
+  createCustomer: (data: any) => apiClient.createCustomer(data),
   getAlloperator: () => apiClient.getOperatorCustomers(),
   getCustomers: () => apiClient.getOperatorCustomers(),
   registerCustomer: (data: any) => apiClient.registerOperatorCustomer(data),
