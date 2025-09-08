@@ -97,9 +97,9 @@ export default function CustomersPage() {
       setError(null)
       console.log("[v0] Fetching customers from API...")
 
-      const [customersData, plansData] = await Promise.allSettled([
+      const [customersData] = await Promise.allSettled([
         operatorApi.getAlloperator(),
-        operatorApi.getAllPlans(),
+        // operatorApi.getAllPlans(),
       ])
 
       if (customersData.status === "fulfilled") {
@@ -110,21 +110,21 @@ export default function CustomersPage() {
         throw new Error("Failed to fetch customers")
       }
 
-      if (plansData.status === "fulfilled") {
-        console.log("[v0] Plans fetched:", plansData.value.length)
-        setPlans(Array.isArray(plansData.value) ? plansData.value : [])
-      } else {
-        console.warn("[v0] Error fetching plans:", plansData.reason)
-        // Set default plans if API fails
-        setPlans([
-          { plan_id: "PLAN001", name: "25 Mbps Basic", speed: "25 Mbps", price: 500, type: "residential" },
-          { plan_id: "PLAN002", name: "50 Mbps Basic", speed: "50 Mbps", price: 800, type: "residential" },
-          { plan_id: "PLAN003", name: "75 Mbps Standard", speed: "75 Mbps", price: 1000, type: "residential" },
-          { plan_id: "PLAN004", name: "100 Mbps Premium", speed: "100 Mbps", price: 1200, type: "residential" },
-          { plan_id: "PLAN005", name: "150 Mbps Premium", speed: "150 Mbps", price: 1800, type: "residential" },
-          { plan_id: "PLAN006", name: "200 Mbps Business", speed: "200 Mbps", price: 2500, type: "business" },
-        ])
-      }
+      // if (plansData.status === "fulfilled") {
+      //   console.log("[v0] Plans fetched:", plansData.value.length)
+      //   setPlans(Array.isArray(plansData.value) ? plansData.value : [])
+      // } else {
+      //   console.warn("[v0] Error fetching plans:", plansData.reason)
+      //   // Set default plans if API fails
+      //   setPlans([
+      //     { plan_id: "PLAN001", name: "25 Mbps Basic", speed: "25 Mbps", price: 500, type: "residential" },
+      //     { plan_id: "PLAN002", name: "50 Mbps Basic", speed: "50 Mbps", price: 800, type: "residential" },
+      //     { plan_id: "PLAN003", name: "75 Mbps Standard", speed: "75 Mbps", price: 1000, type: "residential" },
+      //     { plan_id: "PLAN004", name: "100 Mbps Premium", speed: "100 Mbps", price: 1200, type: "residential" },
+      //     { plan_id: "PLAN005", name: "150 Mbps Premium", speed: "150 Mbps", price: 1800, type: "residential" },
+      //     { plan_id: "PLAN006", name: "200 Mbps Business", speed: "200 Mbps", price: 2500, type: "business" },
+      //   ])
+      // }
 
       toast({
         title: "Data Loaded",
