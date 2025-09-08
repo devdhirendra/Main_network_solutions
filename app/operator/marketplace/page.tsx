@@ -176,13 +176,18 @@ const categories = [
 ]
 
 export default function MarketplaceIntegration() {
-  const [products, setProducts] = useState(marketplaceProducts)
-  const [orders, setOrders] = useState(orderHistory)
-  const [cart, setCart] = useState([])
-  const [searchTerm, setSearchTerm] = useState("")
-  const [categoryFilter, setCategoryFilter] = useState("All Categories")
-  const [sortBy, setSortBy] = useState("relevance")
-  const [selectedProduct, setSelectedProduct] = useState(null)
+// Define a type for cart item
+type CartItem = typeof marketplaceProducts[number] & { quantity: number }
+
+// States
+const [products, setProducts] = useState(marketplaceProducts)
+const [orders, setOrders] = useState(orderHistory)
+const [cart, setCart] = useState<CartItem[]>([])   // 👈 fix here
+const [searchTerm, setSearchTerm] = useState("")
+const [categoryFilter, setCategoryFilter] = useState("All Categories")
+const [sortBy, setSortBy] = useState("relevance")
+const [selectedProduct, setSelectedProduct] = useState<typeof marketplaceProducts[number] | null>(null)
+
   const { toast } = useToast()
 
   const filteredProducts = products.filter((product) => {
